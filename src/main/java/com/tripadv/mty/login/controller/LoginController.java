@@ -19,6 +19,6 @@ public class LoginController {
         newUser.setPassword(passwood);
 
         session.setAttribute("adminName",admin.getAdminName());
-        return "back/index";
+        return "backend/index";
     }
 }
