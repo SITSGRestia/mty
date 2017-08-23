@@ -9,6 +9,6 @@ public class EnterCommandController {
 
     @RequestMapping(value = "/yztcadmin222222",method = RequestMethod.GET)
     public String loginAdmin(){
-        return "back/login";
+        return "backend/login";
     }
 }
