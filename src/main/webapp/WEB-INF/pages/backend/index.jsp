@@ -42,6 +42,13 @@
         <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>删除美食</a></li>
         <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>更新美食</a></li>
     </ul>
+    <h2><span class="icon-pencil-square-o"></span>指南管理</h2>
+    <ul>
+        <li><a href="list.html" target="right"><span class="icon-caret-right"></span>查看指南</a></li>
+        <li><a href="add.html" target="right"><span class="icon-caret-right"></span>添加指南</a></li>
+        <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>删除指南</a></li>
+        <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>更新指南</a></li>
+    </ul>
 
 </div>
 <script type="text/javascript">
