@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tripadv.mty.mapper.hotel.HotelMapper">
+
+    <resultMap type="hotel" id="hotelResultMap">
+        <id column="hot_id" property="hot_id"/>
+        <result column="cit_id" property="cit_id"/>
+        <result column="hbl_id" property="hbl_id"/>
+        <result column="hca_id" property="hca_id"/>
+        <result column="hst_id" property="hst_id"/>
+        <result column="hbr_id" property="hbr_id"/>
+        <result column="hot_name" property="hot_name"/>
+        <result column="hot_ename" property="hot_ename"/>
+        <association property="brand" column="hbr_id"
+                     javaType="HotelBrand" select="findByHotelBrandId">
+        </association>
+        <association property="category" column="hca_id" javaType="HotelCategory"
+                     select="findByHotelCategoryId">
+        </association>
+        <association property="style" column="hst_id" javaType="HotelStyle"
+                     select="findByHotelStyleId">
+        </association>
+        <association property="city" column="cit_id" javaType="City"
+                     select="findByCityId">
+        </association>
+        <collection property="hotelsServiceList" select="findServiceByHotelId"
+                    column="hot_id" ofType="HotelsService"></collection>
+    </resultMap>
+
+    <resultMap type="hotelBrand" id="brandResultMap">
+        <id column="hbr_id" property="hbr_id" />
+        <result column="hbr_name" property="hbr_name"/>
+    </resultMap>
+
+    <resultMap type="hotelCategory" id="categoryResultMap">
+        <id column="hca_id" property="hca_id" />
+        <result column="hca_name" property="hca_name"/>
+    </resultMap>
+
+    <resultMap type="hotelStyle" id="styleResultMap">
+        <id column="hst_id" property="hst_id" />
+        <result column="hst_name" property="hst_name"/>
+    </resultMap>
+
+    <resultMap type="city" id="cityResultMap">
+        <id column="cit_id" property="cit_id" />
+        <result column="cit_name" property="cit_name"/>
+    </resultMap>
+
+
+    <select id="findServiceByHotelId" parameterType="int" resultType="hotelsService">
+        select * from hservice where hse_id in (
+            select hservice_id from hotel_service where hotel_id=#{id}
+        )
+    </select>
+
+    <select id="findByHotelBrandId" parameterType="int" resultMap="brandResultMap">
+        select * from hbrand where hbr_id=#{id}
+    </select>
+    <select id="findByHotelCategoryId" parameterType="int" resultMap="categoryResultMap">
+        select * from hcategory where hca_id=#{id}
+    </select>
+    <select id="findByHotelStyleId" parameterType="int" resultMap="styleResultMap">
+        select * from hstyle where hst_id=#{id}
+    </select>
+    <select id="findByCityId" parameterType="int" resultMap="cityResultMap">
+        select * from city where cit_id=#{id}
+    </select>
+
+    <select id="findAll" resultType="Hotel">
+        select * from hotel
+    </select>
+
+    <sql id="hotelFind">
+        <choose>
+            <when test="cityName!=null and cityName!='' or hotelName!=null and hotelName!=''">
+                <if test="cityName!=null and cityName!=''">
+                    and h.cit_id in (
+                    select ci.cit_id from city ci where ci.cit_name like '%${cityName}%'
+                    )
+                </if>
+                <if test="hotelName!=null and hotelName!=''">
+                    and (h.hot_name like '%${hotelName}%' or h.hot_ename like '%${hotelName}%')
+                </if>
+            </when>
+            <otherwise>
+                <if test="hotelBrands!=null and hotelBrands.length>0">
+                    and h.hbr_id in
+                    <foreach collection="hotelBrands" item="id" open="(" separator="," close=")">
+                        #{id}
+                    </foreach>
+                </if>
+                <if test="hotelCategory!=null and hotelCategory!=-1">
+                    and h.hca_id=#{hotelCategory}
+                </if>
+                <if test="hotelStyles!=null and hotelStyles.length>0">
+                    and h.hst_id in
+                    <foreach collection="hotelStyles" item="id" open="(" separator="," close=")">
+                        #{id}
+                    </foreach>
+                </if>
+                <if test="hotScore!=null and hotelCategory!=-1">
+                    and h.hot_score &gt;= #{hotScore}
+                </if>
+                <if test="hotStars!=null and hotStars.length>0">
+                    and h.hot_star in
+                    <foreach collection="hotStars" item="id" open="(" separator="," close=")">
+                        #{id}
+                    </foreach>
+                </if>
+
+                <if test="hotelsServices!=null and hotelsServices.length>0">
+                    and h.hot_id in (
+                    select hs.hotel_id from hotel_service hs
+                    join hservice hsei on
+                    hs.hservice_id = hsei.hse_id
+                    where hsei.hse_id in
+                    <foreach collection="hotelsServices" item="id" open="(" separator="," close=")">
+                        #{id}
+                    </foreach>
+                    )
+                </if>
+            </otherwise>
+        </choose>
+    </sql>
+
+    <select id="findByPage" parameterType="hotelPage" resultMap="hotelResultMap">
+        select * from hotel h,hcategory hca,hstyle hst,hbrand hbr,city cit
+        where h.cit_id=cit.cit_id and h.hca_id=hca.hca_id and h.hst_id=hst.hst_id
+        and h.hbr_id=hbr.hbr_id
+        <include refid="hotelFind"></include>
+        limit #{begin},#{pageSize}
+    </select>
+
+    <select id="findRecords" parameterType="hotelPage" resultType="int">
+        select count(*) from hotel h,hcategory hca,hstyle hst,hbrand hbr,city cit
+        where h.cit_id=cit.cit_id and h.hca_id=hca.hca_id and h.hst_id=hst.hst_id
+        and h.hbr_id=hbr.hbr_id
+        <include refid="hotelFind"></include>
+    </select>
+
+    <select id="findAllHotelsService" resultType="hotelsService">
+        select * from hservice
+    </select>
+
+    <select id="findAllHotelCategory" resultType="hotelCategory">
+        select * from hcategory
+    </select>
+
+    <select id="findAllHotelStyle" resultType="hotelStyle">
+        select * from hstyle
+    </select>
+
+    <select id="findAllHotelBrand" resultType="hotelBrand">
+        select * from hbrand
+    </select>
+
+    <insert id="save" parameterType="hotel">
+        <selectKey keyProperty="hot_id" order="AFTER" resultType="int">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into hotel values
+        (null,#{cit_id},1,#{hca_id},#{hst_id},#{hbr_id},#{hot_name},#{hot_ename},#{hot_avgprice},
+        #{hot_score},#{hot_detail},#{hot_nearbytitle},#{hot_nearbycon},#{hot_room},#{hot_star},
+        #{hot_rank},#{hot_address},#{hot_book},#{hot_roomcount},#{hot_pic},#{hot_reviewcount},
+        #{hot_map},#{hot_url1},#{hot_url2},#{hot_url3},#{hot_url4})
+    </insert>
+
+    <insert id="saveMiddleHotelService" parameterType="map">
+        insert into hotel_service values(#{hotelId},#{hserviceId})
+    </insert>
+
+    <select id="findAllCity" resultType="city">
+        select * from city
+    </select>
+
+    <select id="findHotelById" parameterType="int" resultMap="hotelResultMap">
+        select * from hotel where hot_id=#{id}
+    </select>
+
+    <delete id="deleteMiddleHotelService" parameterType="int">
+        delete from hotel_service where hotel_id=#{id}
+    </delete>
+
+    <update id="update" parameterType="hotel">
+        update hotel set
+        cit_id=#{cit_id},hca_id=#{hca_id},hst_id=#{hst_id},hbr_id=#{hbr_id},hot_name=#{hot_name},hot_ename=#{hot_ename},
+        hot_avgprice=#{hot_avgprice},hot_score=#{hot_score},hot_detail=#{hot_detail},hot_nearbytitle=#{hot_nearbytitle},
+        hot_nearbycon=#{hot_nearbycon},hot_room=#{hot_room},hot_star=#{hot_star},hot_rank=#{hot_rank},
+        hot_address=#{hot_address},hot_book=#{hot_book},hot_roomcount=#{hot_roomcount},
+        hot_pic=#{hot_pic},hot_reviewcount=#{hot_reviewcount},
+        hot_map=#{hot_map},hot_url1=#{hot_url1},hot_url2=#{hot_url2},
+        hot_url3=#{hot_url3},hot_url4=#{hot_url4} where hot_id=#{hot_id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from hotel where hot_id=#{id}
+    </delete>
+</mapper>

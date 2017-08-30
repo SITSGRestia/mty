@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context.xsd">
 
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
-
-
-	<!-- 组件扫描 -->
+<!-- 组件扫描 -->
 	<context:component-scan base-package="com.tripadv.mty" />
 
 	<mvc:resources mapping="/css/*" location="/css/"/>
@@ -31,23 +28,5 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-<!--
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/*/*" />
-			<mvc:exclude-mapping path="/login/*" />
-			<bean class="com.tripadv.mty.interceptor.login.LoginInterceptor"></bean>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/*/*" />
-			<bean class="com.tripadv.mty.interceptor.privilege.CurrentModuleInterceptor"></bean>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/*/*" />
-			<mvc:exclude-mapping path="/login/*" />
-			<bean class="com.tripadv.mty.interceptor.privilege.PrivilegeInterceptor"></bean>
-		</mvc:interceptor>
-	</mvc:interceptors>
--->
 
 </beans>
