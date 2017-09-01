@@ -1,5 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+=======
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+>>>>>>> origin/lijinhui
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +12,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="renderer" content="webkit">
     <title>后台管理中心</title>  
-    <link rel="stylesheet" href="css/pintuer.css">
-    <link rel="stylesheet" href="css/admin.css">
-    <script src="js/jquery.js"></script>
+    <link rel="stylesheet" href="../css/pintuer.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <script src="../js/jquery.js"></script>
 </head>
 <body style="background-color:#f2f9fd;">
 <div class="header bg-main">
@@ -23,21 +27,26 @@
   <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
   <h2><span class="icon-pencil-square-o"></span>酒店管理</h2>
   <ul>
+<<<<<<< HEAD
     <li><a href="/hotel/findByPage" target="right"><span class="icon-caret-right"></span>分页查询酒店</a></li>
+=======
+    <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>查看酒店</a></li>
+    <li><a href="add.jsp" target="right"><span class="icon-caret-right"></span>添加酒店</a></li>
+    <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>删除酒店</a></li>
+      <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>更新酒店</a></li>
+>>>>>>> origin/lijinhui
   </ul>
     <h2><span class="icon-pencil-square-o"></span>景点管理</h2>
     <ul>
-        <li><a href="list.html" target="right"><span class="icon-caret-right"></span>查看景点</a></li>
-        <li><a href="add.html" target="right"><span class="icon-caret-right"></span>添加景点</a></li>
+        <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>查看景点</a></li>
+        <li><a href="add.jsp" target="right"><span class="icon-caret-right"></span>添加景点</a></li>
         <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>删除景点</a></li>
         <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>更新景点</a></li>
     </ul>
     <h2><span class="icon-pencil-square-o"></span>美食管理</h2>
     <ul>
-        <li><a href="list.html" target="right"><span class="icon-caret-right"></span>查看美食</a></li>
-        <li><a href="add.html" target="right"><span class="icon-caret-right"></span>添加美食</a></li>
-        <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>删除美食</a></li>
-        <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>更新美食</a></li>
+        <li><a href="/restaurant/findByPage.do" target="right"><span class="icon-caret-right"></span>查看美食</a></li>
+        <li><a href="/restaurant/toAdd.do" target="right"><span class="icon-caret-right"></span>添加美食</a></li>
     </ul>
 
 </div>
@@ -57,7 +66,7 @@ $(function(){
 <ul class="bread">
   <li><a href="{:U('Index/info')}" target="right" class="icon-home"> 首页</a></li>
   <li><a href="##" id="a_leader_txt">网站信息</a></li>
-  <li><b>当前语言：</b><span style="color:red;">中文</php></span>
+  <li><b>当前语言：</b><span style="color:red;">中文</span>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;切换语言：<a href="##">中文</a> &nbsp;&nbsp;<a href="##">英文</a> </li>
 </ul>
 <div class="admin">

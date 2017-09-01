@@ -104,6 +104,10 @@
       <artifactId>taglibs-standard-impl</artifactId>
       <version>1.2.1</version>
     </dependency>
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/lijinhui
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
@@ -306,6 +310,7 @@
       <artifactId>fastjson</artifactId>
       <version>1.1.41</version>
     </dependency>
+<<<<<<< HEAD
     <!--shiro-->
     <dependency>
       <groupId>org.apache.shiro</groupId>
@@ -341,5 +346,23 @@
       <artifactId>json-path</artifactId>
       <scope>test</scope>
     </dependency>
+=======
+
+    <!--shiro权限验证 -->
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-core</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.6.1</version>
+      <scope>test</scope>
+    </dependency>
+
+
+>>>>>>> origin/lijinhui
   </dependencies>
 </project>
