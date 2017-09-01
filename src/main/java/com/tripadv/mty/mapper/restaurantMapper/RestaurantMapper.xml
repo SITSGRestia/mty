@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tripadv.mty.mapper.restaurantMapper.RestaurantMapper">
+
+    <!-- 查询总de记录数 -->
+    <select id="findRecords"  parameterType="restaurantPage" resultType="int">
+        SELECT COUNT(*) FROM restaurant
+        <where>
+            <if test="res_ename!=null and res_ename!=''">
+                AND res_ename LIKE '%${res_ename}%'
+            </if>
+        </where>
+    </select>
+
+    <!--查询餐厅信息 -->
+    <select id="findByPage" parameterType="restaurantPage" resultType="restaurant">
+        SELECT * from restaurant
+        <where>
+            <if test="res_ename!=null and res_ename!=''">
+                AND res_ename LIKE '%${res_ename}%'
+            </if>
+        </where>
+        limit #{begin},#{pageSize}
+    </select>
+
+    <!--查询餐厅类型 -->
+    <select id="findByPage1" resultType="rcategory">
+        SELECT * FROM rcategory
+    </select>
+
+    <!--查询菜系分类 -->
+    <select id="findByPage2" resultType="rfood">
+        SELECT * FROM rfood
+    </select>
+
+    <!--查询用餐氛围 -->
+    <select id="findByPage3" resultType="ratmosphere">
+        SELECT * FROM ratmosphere
+    </select>
+
+    <!--查询餐厅特点 -->
+    <select id="findByPage4" resultType="rfeature">
+        SELECT * FROM rfeature
+    </select>
+
+    <!--查询用餐要求 -->
+    <select id="findByPage5" resultType="rhobby">
+        SELECT * FROM rhobby
+    </select>
+
+    <!--查询餐厅营业时间 -->
+    <select id="findByPage6" resultType="rmealtime">
+        SELECT * FROM rmealtime
+    </select>
+
+    <!--查询餐厅附近 -->
+    <select id="findByPage7" resultType="rnearby">
+        SELECT * FROM rnearby
+    </select>
+
+    <!--查询餐厅价格 -->
+    <select id="findByPage8" resultType="rprice">
+    SELECT * FROM rprice
+</select>
+
+    <!-- 添加餐厅 -->
+    <insert id="addRestaurant" parameterType="restaurant">
+        INSERT INTO restaurant (res_id,res_ename,res_openday,res_rank,res_address,res_pic,rca_id,rfo_id,rho_id,rme_id,rpr_id,rne_id,rfe_id,rat_id)
+        VALUES (null,#{res_ename},#{res_openday},#{res_rank},#{res_address},#{res_pic},#{rca_id},#{rfo_id},#{rho_id},#{rme_id},#{rpr_id},
+        #{rne_id},#{rfe_id},#{rat_id})
+    </insert>
+
+    <!-- 删除餐厅 -->
+    <delete id="deleteRestaurant" parameterType="restaurant">
+        DELETE FROM restaurant WHERE res_id = #{res_id}
+    </delete>
+
+    <!-- 通过id查询餐厅信息 -->
+    <select id="findRestaurantById" parameterType="restaurant" resultType="restaurant">
+        SELECT * FROM restaurant WHERE res_id = #{res_id}
+    </select>
+
+    <!-- 修改餐厅信息 -->
+    <update id="updateRestaurant" parameterType="restaurant">
+        UPDATE restaurant SET res_ename=#{res_ename},res_openday=#{res_openday},res_rank=#{res_rank},res_address=#{res_address},res_pic=#{res_pic},
+        rca_id=#{rca_id},rfo_id=#{rfo_id},rho_id=#{rho_id},rme_id=#{rme_id},rpr_id=#{rpr_id},rne_id=#{rne_id},rfe_id=#{rfe_id},rat_id=#{rat_id}
+        WHERE res_id = #{res_id}
+    </update>
+
+</mapper>
