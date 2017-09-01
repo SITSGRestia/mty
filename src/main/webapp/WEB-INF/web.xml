@@ -10,8 +10,7 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:spring-config.xml,
       classpath:spring-jpa.xml,
-      classpath:spring-redis.xml,
-      classpath:spring-shiro-web.xml</param-value>
+      classpath:spring-redis.xml</param-value>
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
