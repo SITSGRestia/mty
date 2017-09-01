@@ -13,6 +13,7 @@
         <result column="hbr_id" property="hbr_id"/>
         <result column="hot_name" property="hot_name"/>
         <result column="hot_ename" property="hot_ename"/>
+        <result column="hot_star" property="hot_star"/>
         <association property="brand" column="hbr_id"
                      javaType="HotelBrand" select="findByHotelBrandId">
         </association>
@@ -74,8 +75,6 @@
     </select>
 
     <sql id="hotelFind">
-        <choose>
-            <when test="cityName!=null and cityName!='' or hotelName!=null and hotelName!=''">
                 <if test="cityName!=null and cityName!=''">
                     and h.cit_id in (
                     select ci.cit_id from city ci where ci.cit_name like '%${cityName}%'
@@ -84,8 +83,6 @@
                 <if test="hotelName!=null and hotelName!=''">
                     and (h.hot_name like '%${hotelName}%' or h.hot_ename like '%${hotelName}%')
                 </if>
-            </when>
-            <otherwise>
                 <if test="hotelBrands!=null and hotelBrands.length>0">
                     and h.hbr_id in
                     <foreach collection="hotelBrands" item="id" open="(" separator="," close=")">
@@ -122,8 +119,15 @@
                     </foreach>
                     )
                 </if>
-            </otherwise>
-        </choose>
+        <if test="hasRoom!=0 and hasRoom!=null">
+            order by h.hot_room desc
+        </if>
+        <if test="hotelReputation!=0 and hotelReputation!=null">
+            order by h.hot_rank
+        </if>
+        <if test="hotelPrice!=0 and hotelPrice!=null">
+            order by h.hot_avgprice desc
+        </if>
     </sql>
 
     <select id="findByPage" parameterType="hotelPage" resultMap="hotelResultMap">

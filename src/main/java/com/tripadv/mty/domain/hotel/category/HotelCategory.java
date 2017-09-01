@@ -1,6 +1,8 @@
 package com.tripadv.mty.domain.hotel.category;
 
-public class HotelCategory {
+import java.io.Serializable;
+
+public class HotelCategory implements Serializable {
     private Integer hca_id;
     private String hca_name;
 

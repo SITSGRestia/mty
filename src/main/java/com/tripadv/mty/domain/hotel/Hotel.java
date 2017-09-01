@@ -6,9 +6,10 @@ import com.tripadv.mty.domain.hotel.category.HotelCategory;
 import com.tripadv.mty.domain.hotel.category.HotelStyle;
 import com.tripadv.mty.domain.hotel.category.HotelsService;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Hotel {
+public class Hotel implements Serializable{
     private Integer hot_id;
     private Integer cit_id;
     private Integer hbl_id;

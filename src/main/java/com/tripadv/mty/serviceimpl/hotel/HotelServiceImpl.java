@@ -8,6 +8,7 @@ import com.tripadv.mty.domain.hotel.category.HotelStyle;
 import com.tripadv.mty.domain.hotel.category.HotelsService;
 import com.tripadv.mty.domain.page.HotelPage;
 import com.tripadv.mty.mapper.hotel.HotelMapper;
+import com.tripadv.mty.redisdao.hotel.HotelRedisDao;
 import com.tripadv.mty.service.hotel.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,10 @@ public class HotelServiceImpl implements HotelService {
 
     @Autowired
     private HotelMapper hotelMapper;
+
+    @Autowired
+    private HotelRedisDao hotelRedisDao;
+
     @Override
     public List<Hotel> findAllHotel() {
         List<Hotel> hotelList = hotelMapper.findAll();
@@ -92,7 +97,16 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Hotel findHotelById(Integer hotelId) {
-        return hotelMapper.findHotelById(hotelId);
+        Hotel hotel = hotelRedisDao.findHotelById(hotelId);
+        System.out.println(hotel);
+        if (hotel==null){
+            System.out.println("没有在缓存中找到该酒店");
+            Hotel hotel1 = hotelMapper.findHotelById(hotelId);
+            hotelRedisDao.saveHotel(hotel1);
+            return hotel1;
+        }
+        System.out.println("在缓存中找到该酒店");
+        return hotel;
     }
 
     @Override

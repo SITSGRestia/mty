@@ -50,8 +50,6 @@ public class UserHotelController {
             List<City> listCity = hotelService.findAllCity();
             session.setAttribute("listCity",listCity);
         }
-        System.out.println("cityName"+hotelPage.getCityName());
-        System.out.println("currentPage"+hotelPage.getCurrentPage());
         List<Hotel> hotelList = hotelService.findByPage(hotelPage);
         model.addAttribute("hotelList",hotelList);
         model.addAttribute("hotelPage",hotelPage);
@@ -65,7 +63,7 @@ public class UserHotelController {
         return "hotel/hotel_detail";
     }
 
-    @RequestMapping(value = "/findByPageAsy",method = RequestMethod.GET)
+    @RequestMapping(value = "/findByPageAsy",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> findByPageAsy(HotelPage hotelPage){
         List<Hotel> hotelList = hotelService.findByPage(hotelPage);

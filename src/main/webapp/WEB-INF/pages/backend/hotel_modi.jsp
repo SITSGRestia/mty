@@ -250,24 +250,24 @@
                     <label>酒店星级：</label>
                 </div>
                 <div class="field">
-                    <select name="hot_score" class="input w50">
+                    <select name="hot_star" class="input w50">
                         <option value="2"
-                                <c:if test="${hotel.hot_score==2}">
+                                <c:if test="${hotel.hot_star==2}">
                                     selected
                                 </c:if>
                         >2</option>
                         <option value="3"
-                                <c:if test="${hotel.hot_score==3}">
+                                <c:if test="${hotel.hot_star==3}">
                                     selected
                                 </c:if>
                         >3</option>
                         <option value="4"
-                                <c:if test="${hotel.hot_score==4}">
+                                <c:if test="${hotel.hot_star==4}">
                                     selected
                                 </c:if>
                         >4</option>
                         <option value="5"
-                                <c:if test="${hotel.hot_score==5}">
+                                <c:if test="${hotel.hot_star==5}">
                                     selected
                                 </c:if>
                         >5</option>

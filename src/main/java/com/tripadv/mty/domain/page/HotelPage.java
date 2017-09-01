@@ -9,6 +9,33 @@ public class HotelPage extends Page {
     private Integer[] hotStars;
     private String cityName;
     private String hotelName;
+    private Integer hasRoom=1;
+    private Integer hotelReputation;
+    private Integer hotelPrice;
+
+    public Integer getHasRoom() {
+        return hasRoom;
+    }
+
+    public void setHasRoom(Integer hasRoom) {
+        this.hasRoom = hasRoom;
+    }
+
+    public Integer getHotelReputation() {
+        return hotelReputation;
+    }
+
+    public void setHotelReputation(Integer hotelReputation) {
+        this.hotelReputation = hotelReputation;
+    }
+
+    public Integer getHotelPrice() {
+        return hotelPrice;
+    }
+
+    public void setHotelPrice(Integer hotelPrice) {
+        this.hotelPrice = hotelPrice;
+    }
 
     public String getHotelName() {
         return hotelName;

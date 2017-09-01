@@ -1,6 +1,12 @@
-package com.tripadv.mty.login.domain;
+package com.tripadv.mty.domain.login;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "admin")
 public class Admin {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String adminName;
     private String password;
