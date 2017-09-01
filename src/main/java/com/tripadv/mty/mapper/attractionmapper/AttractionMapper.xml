@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tripadv.mty.mapper.attractionmapper.AttractionMapper">
+    <!-- 动态分页查询资费信息 -->
+    <select id="findByPage" parameterType="AttractionPage" resultType="Attraction">
+
+        select * from attraction limit #{begin},#{pageSize}
+    </select>
+    <!-- 查询总的资费信息记录数 -->
+    <select id="findAllrecords" resultType="int">
+        select count(*) from attraction
+    </select>
+    <!-- 添加新的资费信息 -->
+    <insert id="saveAttraction" parameterType="attraction">
+        INSERT INTO attraction VALUES (null,#{aca_id},#{cit_id},#{att_name},#{att_ename},#{att_score},#{att_detail},
+        #{att_nearbytitle},#{att_nearbycon},#{att_tel},#{att_httpurl},#{att_time},#{att_address},#{att_pic},#{att_reviewcount},#{att_rank},#{att_map},
+        )
+    </insert>
+
+
+    <!-- 根据id删除资费信息 -->
+    <delete id="deleteAttractionInfo" parameterType="int">
+        delete from attraction where
+        att_id=#{att_id}
+    </delete>
+
+    <!-- 根据id查询资费信息 -->
+    <select id="findAttractionInfo" parameterType="int" resultType="attraction">
+        select
+        * from attraction where att_id=#{att_id}
+    </select>
+
+    <!-- 根据id修改信息 -->
+    <update id="updateAttractionInfo" parameterType="attraction">
+        update attraction set
+        aca_id=#{aca_id},cit_id=#{cit_id},
+        att_name=#{att_name},att_ename=#{att_ename},att_score=#{att_score},att_detail=#{att_detail},att_nearbytitle=#{att_nearbytitle},att_nearbycon=#{att_nearbycon}
+        ,att_tel=#{att_tel},att_httpurl=#{att_httpurl},att_time=#{att_time},att_address=#{att_address},att_pic=#{att_pic},att_reviewcount=#{att_reviewcount},att_rank=#{att_rank},att_map=#{att_map}
+        where
+        iatt_idd=#{att_id}
+    </update>
+
+</mapper>

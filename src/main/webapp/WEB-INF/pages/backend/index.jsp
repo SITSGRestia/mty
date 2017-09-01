@@ -28,8 +28,11 @@
   <h2><span class="icon-pencil-square-o"></span>酒店管理</h2>
   <ul>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <li><a href="/hotel/findByPage" target="right"><span class="icon-caret-right"></span>分页查询酒店</a></li>
 =======
+=======
+>>>>>>> origin/wanglei
     <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>查看酒店</a></li>
     <li><a href="add.jsp" target="right"><span class="icon-caret-right"></span>添加酒店</a></li>
     <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>删除酒店</a></li>
@@ -38,15 +41,27 @@
   </ul>
     <h2><span class="icon-pencil-square-o"></span>景点管理</h2>
     <ul>
+<<<<<<< HEAD
         <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>查看景点</a></li>
         <li><a href="add.jsp" target="right"><span class="icon-caret-right"></span>添加景点</a></li>
+=======
+        <li><a href="/attraction/findByPage.do" target="right"><span class="icon-caret-right"></span>查看景点</a></li>
+        <li><a href="/attarction/toAdd.do" target="right"><span class="icon-caret-right"></span>添加景点</a></li>
+>>>>>>> origin/wanglei
         <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>删除景点</a></li>
         <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>更新景点</a></li>
     </ul>
     <h2><span class="icon-pencil-square-o"></span>美食管理</h2>
     <ul>
+<<<<<<< HEAD
         <li><a href="/restaurant/findByPage.do" target="right"><span class="icon-caret-right"></span>查看美食</a></li>
         <li><a href="/restaurant/toAdd.do" target="right"><span class="icon-caret-right"></span>添加美食</a></li>
+=======
+        <li><a href="list.jsp" target="right"><span class="icon-caret-right"></span>查看美食</a></li>
+        <li><a href="add.jsp" target="right"><span class="icon-caret-right"></span>添加美食</a></li>
+        <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>删除美食</a></li>
+        <li><a href="cate.html" target="right"><span class="icon-caret-right"></span>更新美食</a></li>
+>>>>>>> origin/wanglei
     </ul>
 
 </div>
